@@ -1,0 +1,29 @@
+services:
+  node-manager:
+    image: docker:dind
+    container_name: node-manager
+    privileged: true
+    networks:
+      swarm-net:
+        ipv4_address: 172.20.0.10
+  node-worker1:
+    image: docker:dind
+    container_name: node-worker1
+    privileged: true
+    networks:
+      swarm-net:
+        ipv4_address: 172.20.0.20
+  node-worker2:
+    image: docker:dind
+    container_name: node-worker2
+    privileged: true
+    networks:
+      swarm-net:
+        ipv4_address: 172.20.0.30
+
+networks:
+  swarm-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
